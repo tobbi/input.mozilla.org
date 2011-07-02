@@ -195,7 +195,8 @@ def when_block(context, form, defaults=None, selected=None):
 @register.function
 def date_ago(**kwargs):
     """Returns the date for the given timedelta from now."""
-    return datetime.date.today() - datetime.timedelta(**kwargs)
+    return datetime.date.strftime(datetime.date.today() -
+        datetime.timedelta(**kwargs), "%m/%d/%Y")
 
 
 @register.inclusion_tag('includes/filter_box_toggle.html')
