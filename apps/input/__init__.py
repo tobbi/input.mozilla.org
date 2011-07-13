@@ -79,6 +79,7 @@ class FIREFOX:
     guid = '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}'
     extra_versions = ['8.0a1', '7.0a2', '7.0a1', '6.0a2', '6.0', '5.0']
     default_version = '5.0'  # Default dashboard version.
+    min_version = '4.0'  # Minimum version for which we'll accept feedback
     beta_versions = version_list(
         dict(product_details.firefox_history_major_releases.items() +
              product_details.firefox_history_stability_releases.items() +
@@ -102,6 +103,7 @@ class MOBILE:
     guid = '{a23983c0-fd0e-11dc-95ff-0800200c9a66}'
     extra_versions = ['8.0a1', '7.0a2', '7.0a1', '6.0a2', '6.0', '5.0']
     default_version = '5.0'
+    min_version = '4.0'  # Minimum version for which we'll accept feedback
     beta_versions = version_list(
         dict(product_details.mobile_history_major_releases.items() +
              product_details.mobile_history_stability_releases.items() +

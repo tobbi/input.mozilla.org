@@ -59,6 +59,12 @@ class BetaViewTests(ViewTestCase):
         r = self._get_page('20.0a2')
         eq_(r.status_code, 200)
 
+    @enforce_ua
+    def test_recent_version(self):
+        """Old beta: redirect."""
+        r = self._get_page('5.0')
+        eq_(r.status_code, 200)
+
     def test_give_feedback(self):
         r = self.client.post(reverse('feedback'))
         eq_(r.content, 'User-Agent request header must be set.')
@@ -136,7 +142,7 @@ class BetaViewTests(ViewTestCase):
             for form in forms:
                 eq_(pq(form).attr('autocomplete'), 'off')
 
-        with_site(settings.DESKTOP_SITE_ID)        
+        with_site(settings.DESKTOP_SITE_ID)
         with_site(settings.MOBILE_SITE_ID)
 
 

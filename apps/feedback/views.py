@@ -44,7 +44,7 @@ def enforce_ua(f):
             return f(request, ua=ua, *args, **kwargs)
 
         this_ver = Version(parsed['version'])
-        ref_ver = Version(input.LATEST_RELEASE[parsed['browser']])
+        ref_ver = Version(parsed['browser'].min_version)
         # Check for outdated release.
         if this_ver < ref_ver:
             return http.HttpResponseRedirect(reverse('feedback.download'))
@@ -124,7 +124,7 @@ def thanks(request):
 @cache_page
 def opinion_detail(request, id):
     o = get_object_or_404(Opinion, pk=id)
-    
+
     if not request.mobile_site:
         template = 'feedback/opinion.html'
     else:
