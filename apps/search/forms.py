@@ -2,6 +2,7 @@ from datetime import date
 
 from django.conf import settings
 from django import forms
+from django.forms.util import ErrorDict
 
 from product_details import product_details
 from product_details.version_compare import Version
@@ -120,3 +121,23 @@ class ReporterSearchForm(forms.Form):
             cleaned['version'] = ''
 
         return cleaned
+
+    def full_clean(self):
+        """
+        Like Django's but we don't delete cleaned_data on error.
+        """
+        self._errors = ErrorDict()
+        if not self.is_bound: # Stop further processing.
+            return
+        self.cleaned_data = {}
+        # If the form is permitted to be empty, and none of the form data has
+        # changed from the initial data, short circuit any validation.
+        if self.empty_permitted and not self.has_changed():
+            return
+        self._clean_fields()
+        self._clean_form()
+        self._post_clean()
+        # Errors are for data-prudes
+        for field in self._errors.keys():
+            self.cleaned_data[field] = ''
+        self._errors = ErrorDict()

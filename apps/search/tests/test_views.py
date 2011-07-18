@@ -104,6 +104,12 @@ class SearchViewTest(SphinxTestCase):
         populate(10, 'desktop', OPINION_ISSUE)
         super(SearchViewTest, cls).setup_class()
 
+    def test_filter_date_bad(self):
+        r = search_request(date_start='s', date_end='s')
+        doc = pq(r.content)
+        # Ignore the faulty dates.
+        assert doc('.message')
+
     def test_filter_date_no_end(self):
         """End date should be today."""
         r = search_request()
@@ -191,17 +197,6 @@ class SearchViewTest(SphinxTestCase):
         eq_(r.status_code, 200)
         assert not r.context['form'].cleaned_data.get('date_start')
         assert not r.context['form'].cleaned_data.get('date_end')
-
-    def test_search_with_invalid_date(self):
-        """Date validation should not error out."""
-        data = {
-            'product': 'firefox',
-            'date_start': 'cheesecake',
-            'date_end': '',
-        }
-        r = self.client.get(reverse('search'), data, follow=True)
-        eq_(r.status_code, 200)
-        assert not hasattr(r.context['form'], 'cleaned_data')
 
     def test_when_selectors(self):
         """Test that the date selectors show the right dates."""
