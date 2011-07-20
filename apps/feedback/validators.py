@@ -23,6 +23,7 @@ PRIVATE_IP_RE = re.compile(
     r'(?:172\.1[6-9]\.)|'
     r'(?:172\.2[0-9]\.)|'
     r'(?:172\.3[0-1]\.)|'
+    r'(?:localhost)|'
     r'(?:192\.168\.)', re.IGNORECASE)
 
 # Simple "possibly a URL" regex
@@ -78,7 +79,6 @@ class ExtendedURLValidator(validators.URLValidator):
         r'^chrome://[a-z][/?\.\S]+$|'  # chrome://... URLs
         r'^https?://' # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|' # domain...
-        r'localhost|' # localhost...
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
         r'(?::\d+)?' # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)

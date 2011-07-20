@@ -29,6 +29,7 @@ class ValidatorTests(test_utils.TestCase):
             ('http://127.0.0.1', True),
             ('HTTP://10.0.0.13', True),
             ('https://192.168.0.4', True),
+            ('http://localhost', True),
         )
         for pattern in patterns:
             if pattern[1]:
