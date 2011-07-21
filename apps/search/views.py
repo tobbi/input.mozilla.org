@@ -182,6 +182,7 @@ def get_period(form):
 
     return 'custom', days
 
+
 @forward_mobile
 @cache_page(use_get=True)
 def index(request):
