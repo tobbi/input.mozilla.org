@@ -1,6 +1,7 @@
 import os
 import re
 import socket
+import sys
 import time
 from calendar import timegm
 from collections import defaultdict
@@ -90,7 +91,10 @@ def time_as_int(date, utc=False):
     interprets the input as a UTC based timestamp.
     """
     t = date.timetuple()
-    return int(timegm(t) if utc else time.mktime(t))
+    try:
+        return int(timegm(t) if utc else time.mktime(t))
+    except OverflowError:
+        return sys.maxint
 
 
 class SearchError(Exception):
