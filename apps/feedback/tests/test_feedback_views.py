@@ -169,3 +169,12 @@ class BetaViewTests(ViewTestCase):
                             HTTP_USER_AGENT=(self.FX_UA % '20.0b2'),
                             follow=True)
         eq_(r.status_code, 200)
+
+    def test_mobile_sumo_url(self):
+        """Test the sumo url in the mobile version."""
+        r = self.client.get(reverse('feedback'), 
+                            HTTP_USER_AGENT=(self.FX_UA % '20.0b2'), 
+                            SITE_ID=settings.MOBILE_SITE_ID)
+        doc = pq(r.content)
+        sumo_url = doc('#sumo-url')
+        eq_(sumo_url.attr('href'), 'http://support.mozilla.com/en-US/')

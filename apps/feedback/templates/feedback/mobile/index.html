@@ -51,9 +51,9 @@
       <div class="field">
         <p class="warning">
           <span>
-            {% trans url='http://support.mozilla.com/{{ LANG }}/' %}
+            {% trans url='http://support.mozilla.com/' + LANG %}
             If you need help or have a problem with Firefox,
-            please visit <a href="{{ url }}">Firefox Support</a>.
+            please visit <a id="sumo-url" href="{{ url }}/">Firefox Support</a>.
             {% endtrans %}
           </span>
         </p>
