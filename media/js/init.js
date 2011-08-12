@@ -4,7 +4,7 @@ $(document).ready(function(){
     $('input[placeholder]').placeholder();
 
     // initialize date pickers
-    if ($.datepicker) $('.datepicker').datepicker({ maxDate: '0' });
+    if ($.datepicker) $('.datepicker').datepicker({ maxDate: '0', dateFormat: 'yy-mm-dd' });
 
     // initialize Copy UA lightbox
     var overlay = $('#ua_overlay');

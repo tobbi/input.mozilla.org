@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-from urllib import quote_plus
 
 from django.contrib.sites.models import Site
 from django.test.client import Client as TestClient
@@ -213,7 +212,7 @@ class SearchViewTest(SphinxTestCase):
             link = a.attr('href')
             if expect[n]:
                 assert link.find('date_start=%s' %
-                                 quote_plus(expect[n].strftime('%m/%d/%Y'))) >= 0
+                                 expect[n].strftime('%Y-%m-%d')) >= 0
             else:
                 assert link.find('date_start') == -1
             assert link.find('date_end') == -1  # Never add end date.
