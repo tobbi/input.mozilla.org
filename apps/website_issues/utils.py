@@ -18,10 +18,10 @@ def urlparse(url):
             scheme=parsed[0], netloc=parsed[1], path=None, params=None,
             query=None, fragment=None)
     elif url.startswith('chrome://'):
-        parsed = url.split('://', 1)[1].split('/')
+        parsed = url.split('://', 1)[1]
         path = parsed[1] if len(parsed) > 1 else ''
         return ParseResult(
-            scheme='chrome', netloc=parsed[0], path=path,
+            scheme='chrome', netloc=parsed, path=path,
             params=None, query=None, fragment=None)
     else:
         return urlparse_.urlparse(url)
